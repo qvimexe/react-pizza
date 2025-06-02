@@ -4,25 +4,36 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
+import Pagination from "../components/Pagination";
 
 export default function Home() {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-    const [activeIndex, setActiveIndex] = React.useState(0);
-    const [selected, setSelected] = React.useState(0);
+  // const [activeIndex, setActiveIndex] = React.useState(0);
+  // const [selected, setSelected] = React.useState(0);
+
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   React.useEffect(() => {
-    fetch("https://683aa5cf43bb370a867346fc.mockapi.io/pizza-items").then(
-      (res) => {
-        return res.json().then((arr) => {
-          setItems(arr);
-          setIsLoading(false);
-        });
-      }
-    );
+    fetch(
+      `https://683aa5cf43bb370a867346fc.mockapi.io/pizza-items?page=${currentPage}&limit=4&`
+    ).then((res) => {
+      return res.json().then((arr) => {
+        setItems(arr);
+        setIsLoading(false);
+      });
+    });
     window.scrollTo(0, 0);
-  }, []);
+  }, [currentPage]);
+
+  // const handlePageClick = (event) => {
+  //   const newOffset = (event.selected * itemsPerPage) % items.length;
+  //   console.log(
+  //     `User requested page number ${event.selected}, which is offset ${newOffset}`
+  //   );
+  //   setItemOffset(newOffset);
+  // };
 
   return (
     <div className="container">
@@ -36,6 +47,7 @@ export default function Home() {
           ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
           : items.map((item) => <PizzaBlock {...item} key={item.id} />)}
       </div>
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </div>
   );
 }
