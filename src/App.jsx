@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <div className="wrapper">
-        <SearchContext.Provider>
+        <SearchContext.Provider value={[]}>
           <Header />
           <div className="content">
             <Routes>

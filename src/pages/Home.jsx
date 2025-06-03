@@ -6,6 +6,8 @@ import PizzaBlock from "../components/PizzaBlock/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
 import Pagination from "../components/Pagination";
 
+import axios from "axios";
+
 export default function Home() {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -15,17 +17,26 @@ export default function Home() {
 
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  React.useEffect(() => {
-    fetch(
+  // React.useEffect(() => {
+  //   fetch(
+  //     `https://683aa5cf43bb370a867346fc.mockapi.io/pizza-items?page=${currentPage}&limit=4&`
+  //   ).then((res) => {
+  //     return res.json().then((arr) => {
+  //       setItems(arr);
+  //       setIsLoading(false);
+  //     });
+  //   });
+  //   window.scrollTo(0, 0);
+  // }, [currentPage]);
+
+  axios
+    .get(
       `https://683aa5cf43bb370a867346fc.mockapi.io/pizza-items?page=${currentPage}&limit=4&`
-    ).then((res) => {
-      return res.json().then((arr) => {
-        setItems(arr);
-        setIsLoading(false);
-      });
+    )
+    .then((res) => {
+      setItems(res.data);
+      setIsLoading(false);
     });
-    window.scrollTo(0, 0);
-  }, [currentPage]);
 
   // const handlePageClick = (event) => {
   //   const newOffset = (event.selected * itemsPerPage) % items.length;
