@@ -6,5 +6,3 @@ export const store = configureStore({
     filter,
   },
 });
-
-// это ХРАНИЛИЩЕ
