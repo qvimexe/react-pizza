@@ -12,9 +12,6 @@ export default function Home() {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  // const [activeIndex, setActiveIndex] = React.useState(0);
-  // const [selected, setSelected] = React.useState(0);
-
   const [currentPage, setCurrentPage] = React.useState(1);
 
   // React.useEffect(() => {
