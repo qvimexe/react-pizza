@@ -12,6 +12,7 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 ## Expanding the ESLint configuration
 omg
+omg
 
 ## Expanding the ESLint configuration
 
